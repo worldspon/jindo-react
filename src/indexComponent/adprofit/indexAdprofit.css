@@ -1,3 +1,36 @@
-.adprofit-header-wrap {
-    
+.adprofit__header {
+    display: flex;
+}
+
+.adprofit__category {
+    display: flex;
+    width: 33%;
+    padding: 20px 0;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: white;
+}
+
+.adprofit__category__title {
+}
+
+.adprofit__category__title::after {
+    content: "";
+    background-color: #000;
+    position: relative;
+    width: 2px;
+    height: 14px;
+    top: 1px;
+    margin: 0 20px;
+    display: inline-block;
+}
+
+.adprofit__category:not(:first-of-type) {
+    margin-left: 20px;
+}
+
+.adprofit__category__number {
+    color: #757474;
 }

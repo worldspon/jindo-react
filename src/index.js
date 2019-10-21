@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './common/reset.css';
-import './common/common.css';
+import common from './common/common.css';
+import styles from './index.css';
 import Header from './common/header.js';
 import Adprofit from './indexComponent/adprofit/indexAdprofit.js';
 
@@ -10,14 +10,24 @@ const userInfo = {
     admin: false
 }
 
+const prevMonth = {
+    month: 9,
+    total: 281.47
+}
+
+const currentMonth = {
+    month: 10,
+    total: 217.57
+}
+
 class Index extends React.Component {
     render() {
         return (
-            <div>
+            <div className={common.wrap}>
                 <Header userInfo={userInfo} />
-                <main>
-                    <Adprofit />
-                </main>
+                <div className={common.main}>
+                    <Adprofit prevMonth={prevMonth} currentMonth={currentMonth} />
+                </div>
             </div>
         )
     }
@@ -25,5 +35,5 @@ class Index extends React.Component {
 
 ReactDOM.render(
   <Index />,
-  document.getElementById('wrap')
+  document.getElementById('root')
 );

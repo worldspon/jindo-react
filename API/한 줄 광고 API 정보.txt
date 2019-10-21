@@ -1,0 +1,54 @@
+﻿[한 줄 광고 유저용]
+
+1. 한 줄 광고 신청
+TYPE : POST
+URL : /promotion/request
+Parameter : 
+{
+	"chat" : "광고 내용", 
+	"colorKey" : "글 색상", 
+	"state" : "광고 상태" // 0으로 설정해서 주세요.
+	"useDate" : "광고 기간" // 1 ~ 90
+}
+
+응답 : 
+{
+	"errorCode" : "에러 코드", 
+	"msg" : "처리 결과 메시지"
+}
+
+
+2.  한 줄 광고 수정
+TYPE : POST
+URL : /promotion/modify
+Parameter : 
+{
+	"uniqueId" : "한 줄 광고 식별값", 
+	"chat" : "수정한 광고 내용"
+}
+
+응답 : 
+{
+	"errorCode" : "에러 코드", 
+	"msg" : "처리 결과 메시지"
+}
+
+
+
+
+
+[한 줄 광고 관리자용]
+1. 한 줄 광고 상태 변경
+TYPE : POST 
+URL : /promotion/state/change
+Parameter : 
+{
+	"uniqueId" : "한 줄 광고 식별값", 
+	"state" : "상태값" // 1: 승인, 2: 반려
+}
+
+응답 : 
+{
+	"errorCode" : "에러 코드", 
+	"msg" : "처리 결과 메시지"
+}

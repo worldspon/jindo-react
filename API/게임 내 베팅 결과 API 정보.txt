@@ -1,0 +1,113 @@
+﻿[좀비 레이스 내 베팅 결과]
+1. URL : /game/myBet/zombieRace
+2. Type : POST
+3. Parameter : 
+{
+	appid : "사용자 유니크 아이디" // 사용자 유니크 아이디는 URL에서 취합하시면 됩니다. ex) http://www.worldspon.net/game/myBet/{uniqueId}
+}
+4. 응답 
+{
+	race : 
+	[
+		{
+			uniqueId : "내 베팅 식별값", 
+			dateTime : "베팅 일자", 
+			gameCount : "게임 회차", 
+			zombieName : "베팅 좀비 이름", 
+			coupon : "베팅한 쿠폰 수", 
+			resultGameMoney : "당첨 게임머니", 
+			resultRank : "당첨 랭킹 점수",
+			result : "결과 (등 수)" 
+		}
+	], 
+	errorCode : "에러코드"
+}
+
+
+
+
+
+[좀비 격투 내 베팅 결과]
+1. URL : /game/myBet/zombieFight
+2. Type : POST
+3. Parameter 
+{
+	appid : "사용자 유니크 아이디"
+}
+4. 응답 
+{
+	fight : 
+	[
+		{
+			uniqueId : "내 베팅 식별값", 
+			dateTime : "베팅 일자", 
+			gameCount : "게임 회차", 
+			zombieName : "베팅 좀비 이름", 
+			coupon : "베팅한 쿠폰 수", 
+			koChoice : "KO 선택 여부", 
+			resultGameMoney : "당첨 게임머니", 
+			resultRank : "당첨 랭킹 점수",
+			gameResult : "게임 결과", 
+		}
+	], 
+	errorCode : "에러코드"
+}
+
+
+
+
+
+[좀비 격파 내 베팅 결과]
+1. URL : /game/myBet/zombieBreak
+2. Type : POST
+3. Parameter 
+{
+	appid : "사용자 유니크 아이디"
+}
+4. 응답 
+{
+	break : 
+	[
+		{
+			uniqueId : "내 베팅 식별값", 
+			dateTime : "베팅 일자", 
+			gameCount : "게임 회차", 
+			zombieName : "베팅 좀비 이름", 
+			coupon : "베팅한 쿠폰 수", 
+			resultGameMoney : "당첨 게임머니", 
+			resultRank : "당첨 랭킹 점수", 
+			result : "결과 (격파 수)"
+		}
+	],
+	errorCode : "에러코드" 
+}
+
+
+
+
+
+[좀비 낙하 내 베팅 결과]
+1. URL : /game/myBet/zombieDrop
+2. Type : POST
+3. Parameter 
+{
+	appid : "사용자 유니크 아이디"
+}
+4. 응답  
+{
+	drop : 
+	[ 
+		{
+			uniqueId : "베팅 기록 식별값", 
+			dateTime : "게임 시간", 
+			gameCount : "게임 회차",
+			result : "[7, 11, 15, 20, 27]", 
+			matchPoint : "당첨 수", 
+			prizeGameMoney : "당첨 게임머니", 
+			prizeSpon : "당첨 스폰", 
+			prizeRank : "당첨 랭킹점수", 
+			grade : "등 수" 
+		} 
+	], 
+	errorCode : "에러코드"
+}

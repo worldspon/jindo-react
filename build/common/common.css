@@ -8,14 +8,14 @@ a, a:visited {
     color: black;
 }
 
-.wrap {
+#wrap {
     width: 100%;
     max-width: 2560px;
     margin: 0 auto;
     box-sizing: border-box;
 }
 
-.main {
+main {
     padding: 20px;
     background-color: #eff3fa;
 }

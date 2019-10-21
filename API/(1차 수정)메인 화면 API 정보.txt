@@ -1,0 +1,125 @@
+﻿[광고 수익 차트]
+1. URL : /main/adprofit
+2. TYPE : GET 
+3. 응답 : 
+{
+	closing : {
+		저번달
+	}
+	forecast : 
+	{
+		day01 : "이번 달 예상 수익", // day다음에 붙는 숫자는 날짜 형식의 DD 입니다.
+		day02 : "이번 달 예상 수익",
+		day03 : "이번 달 예상 수익",
+		day04 : "이번 달 예상 수익",
+		day05 : "이번 달 예상 수익",
+		day06 : "이번 달 예상 수익",
+		day07 : "이번 달 예상 수익",
+	},
+	totalClosing : "이번 달 예상 수익 합계", 
+	totalForecast : "저번 달 결산 수익 합계", 
+	errorCode : "에러 코드"
+}
+
+
+
+
+
+[공지사항]
+1. URL : /main/notice
+2. TYPE : GET 
+3. 응답 : 
+{
+	noticeList : 
+	[
+		{
+			title : "게시글 제목", 
+			writeDate : "작성일"
+		}
+	],
+	errorCode : "에러 코드"
+}
+
+
+
+
+
+[FAQ]
+1. URL : /main/faq
+2. TYPE : GET 
+3. 응답 : 
+{
+	faqList : 
+	[
+		{
+			question : "질문 내용", 
+			writeDate : "작성일"
+		}
+	],
+	errorCode : "에러 코드"
+}
+
+
+
+
+
+
+[게임 결과]
+1. URL : /main/game
+2. TYPE : GET 
+3. 응답 : 
+{
+	race : 
+	[
+		{
+			dateTime : "게임 일자", 
+			count : "게임 회차", 
+			win1 : "1위 좀비", 
+			win2 : "2위 좀비",
+			win3 : "3위 좀비", 
+			win4 : "4위 좀비", 
+			win5 : "5위 좀비" 
+		}
+	], 
+	fight : 
+	[
+		{
+			dateTime : "게임 일자", 
+			count : "게임 회차", 
+			leftPlayer : "왼쪽 좀비", 
+			rightPlayer : "오른쪽 좀비", 
+			KO : "KO 여부" // boolean type, 
+			winner : "승자"
+		}
+	], 
+	break : 
+	[
+		{
+			dateTime : "게임 일자", 
+			count : "게임 회차", 
+			leftPlayer : "왼쪽 좀비", 
+			rightPlayer : "오른쪽 좀비", 
+			leftBroken : "왼쪽 격파 수", 
+			rightBroken : "오른쪽 격파 수", 
+			winner : "승자"
+		}
+	], 
+	drop : 
+	[
+		{
+			dateTime : "게임 일자", 
+			count : "게임 회차", 
+			result : [13, 18, 19, 23, 25]
+		}
+	]
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,104 @@
+﻿[좀비 레이스]
+오늘 결과 정보 URL : /game/zombieRace/today
+어제 결과 정보 URL : /game/zombieRace/yesterday
+{ 
+	"zombieRace" : 
+	[ 
+		{ 
+			"dateTime" : "게임 실행 일", 
+			"count" : "180회차", 
+			"win1" : "1등", 
+			"win2" : "2등", 
+			"win3" : "3등", 
+			"win4" : "4등", 
+			"win5" : "5등" 
+		},
+		 ... 
+		// 준비중 일 때
+		{
+			"dateTime" : "게임 실행 일", 
+			"count" : "회차", 
+			"win1" : "준비중", 
+			"win2" : "준비중", 
+			"win3" : "준비중", 
+			"win4" : "준비중", 
+			"win5" : "준비중" 
+		}
+	]
+ }
+
+
+
+[좀비 격파]
+오늘 결과 정보 URL : /game/zombieBreak/today
+어제 결과 정보 URL : /game/zombieBreak/yesterday
+{ 
+	"zombieBreak" : 
+	[ 
+		{ 
+			"dateTime" : "게임 실행 일", 
+			"count" : "회차", 
+			"leftPlayer" : "왼쪽 선수", 
+			"rightPlayer" : "오른쪽 선수", 
+			"leftBroken" : "왼쪽 격파 수", 
+			"rightBroken" : "오른쪽 격파 수", 
+			"winner" : "승자" 
+		},
+		...
+		// 준비중일 때
+		{ 
+			"dateTime" : "게임 실행 일", 
+			"count" : "회차", 
+			"leftPlayer" : "왼쪽 선수", 
+			"rightPlayer" : "오른쪽 선수", 
+			"leftBroken" : "준비중", 
+			"rightBroken" : "준비중", 
+			"winner" : "준비중" 
+		}
+	] 
+}
+
+
+
+[좀비 격투]
+오늘 결과 정보 URL : /game/zombieFight/today
+어제 결과 정보 URL : /game/zombieFight/yesterday
+{ 
+	"zombieFight" : 
+	[ 
+		{ 
+			"dateTime" : "게임 실행 일", 
+			"count" : "회차", 
+			"leftPlayer" : "왼쪽 선수", 
+			"rightPlayer" : "오른쪽 선수", 
+			"winner" : "승자", 
+			"KO" : "boolean (true: KO, false: 판정승)" 
+		},
+		...
+		// 준비중일 때 
+		{ 
+			"dateTime" : "게임 실행 일", 
+			"count" : "회차", 
+			"leftPlayer" : "왼쪽 선수", 
+			"rightPlayer" : "오른쪽 선수", 
+			"winner" : "준비중", 
+			"KO" : "boolean (only false: 판정승)" 
+		}
+	] 
+}
+
+[좀비 낙하]
+오늘 결과 정보 URL : /game/zombieDrop/today
+어제 결과 정보 URL : /game/zombieDrop/yesterday
+{ 
+	"zombieDrop" : 
+	[ 
+		{ 
+			"dateTime" : "게임 실행 일", 
+			"count" : "회차", 
+			"result" : [ 1, 2, 3, 4, 5 ] 
+		}, 
+		...
+		// 준비중인 데이터 없음
+	] 
+}
