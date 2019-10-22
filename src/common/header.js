@@ -4,7 +4,11 @@ import styles from './header.css';
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.state = props.userInfo
+        this.state = {
+            subMenu: false
+        }
+        // this.showSubMenu = this.showSubMenu.bind(this);
+        // this.hideSubMenu = this.hideSubMenu.bind(this);
     }
 
     showSubMenu() {
@@ -69,7 +73,7 @@ export default class Header extends React.Component {
                             </ul>
                         </li>
                         {
-                            this.state.admin && <li className={styles.menu__category}>
+                            this.props.userInfo.admin && <li className={styles.menu__category}>
                             관리자
                             <ul
                                 className={styles.submenu}
@@ -85,13 +89,13 @@ export default class Header extends React.Component {
                     </ul>
                 </nav>
                 <div className={styles.user__infoBox}>
-                    <span className={styles.user__name}>{this.state.id}님</span>
+                    <span className={styles.user__name}>{this.props.userInfo.id}님</span>
                     <button className={styles.logout}>로그아웃</button>
                 </div>
                 <div
                     className={styles.submenu__background}
                     style={this.state.subMenu ? {display: 'block'} : {display: 'none'}}
-                    onMouseOut={() => {this.hideSubMenu()}}
+                    onMouseOut={() => this.hideSubMenu()}
                 ></div>
             </header>
         )

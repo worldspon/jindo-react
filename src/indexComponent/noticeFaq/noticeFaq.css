@@ -1,0 +1,43 @@
+.noticeFaqBox {
+    display: flex;
+}
+
+.noticeBox, .faqBox {
+    width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.03);
+}
+
+.noticeBox {
+    margin-right: 20px;
+}
+
+.noticeFaqBox__title {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.noticeFaqBox__title::after {
+    content: "";
+    background-color: #dcdcdc;
+    position: relative;
+    width: 100%;
+    height: 1px;
+    margin: 20px 0;
+    display: block;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #757474;
+}
+
+.row:not(:last-of-type) {
+    margin-bottom: 30px;
+}

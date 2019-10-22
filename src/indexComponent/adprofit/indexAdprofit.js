@@ -1,11 +1,18 @@
 import React from 'react';
 import styles from './indexAdprofit.css'
+import 'chart.js';
+
+
 
 export default class Adprofit extends React.Component {
     constructor(props) {
         super(props);
-        this.state = props
+        this.state = {
+            prevMonth: props.prevMonth,
+            currentMonth: props.currentMonth
+        }
     }
+
 
     componentDidMount() {
         // fetch("https://jsonplaceholder.typicode.com/todos/1")

@@ -1,19 +1,19 @@
 .adprofit__header {
     display: flex;
+    margin-bottom: 20px;
 }
 
 .adprofit__category {
     display: flex;
-    width: 33%;
+    width: 100%;
     padding: 20px 0;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
+    border-radius: 5px;
     background-color: white;
-}
-
-.adprofit__category__title {
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.03);
 }
 
 .adprofit__category__title::after {

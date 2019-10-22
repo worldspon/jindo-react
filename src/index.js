@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import common from './common/common.css';
-import styles from './index.css';
 import Header from './common/header.js';
 import Adprofit from './indexComponent/adprofit/indexAdprofit.js';
+import AdprofitChart from './indexComponent/adprofitChart/indexAdprofitChart.js';
+import NoticeFaq from './indexComponent/noticeFaq/noticeFaq.js';
 
 const userInfo = {
     id: 'WSJH',
-    admin: false
+    admin: true
 }
 
 const prevMonth = {
@@ -21,12 +22,15 @@ const currentMonth = {
 }
 
 class Index extends React.Component {
+
     render() {
         return (
             <div className={common.wrap}>
                 <Header userInfo={userInfo} />
                 <div className={common.main}>
                     <Adprofit prevMonth={prevMonth} currentMonth={currentMonth} />
+                    <AdprofitChart />
+                    <NoticeFaq />
                 </div>
             </div>
         )
