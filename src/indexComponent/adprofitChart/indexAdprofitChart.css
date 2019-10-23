@@ -14,17 +14,7 @@
     margin-bottom: 20px;
 }
 
-.titleBox__title {
+.title {
     font-size: 1.6rem;
     font-weight: bold;
-}
-
-.titleBox__button {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    background-color: #683b93;
-    color: white;
 }

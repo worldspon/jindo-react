@@ -19,7 +19,7 @@ header {
     display: flex;
 }
 
-.menu__category {
+.category {
     position: relative;
     width: 100px;
     font-size: 1.5rem;
@@ -28,11 +28,11 @@ header {
     cursor: pointer;
 }
 
-.menu__category:not(:last-of-type) {
+.category:not(:last-of-type) {
     margin-right: 50px;
 }
 
-.submenu {
+.subMenu {
     position: absolute;
     width: 100px;
     font-size: 1.2rem;
@@ -40,15 +40,15 @@ header {
     top: 30px;
 }
 
-.submenu li {
+.subMenu li {
     cursor: pointer;
 }
 
-.submenu li:not(:last-child) {
+.subMenu li:not(:last-child) {
     margin-bottom: 10px;
 }
 
-.submenu__background {
+.subMenuBackground {
     width: 100%;
     height: 160px;
     position: absolute;
@@ -58,11 +58,11 @@ header {
     z-index: -5;
 }
 
-.user__infoBox {
+.userBox {
     margin-left: auto;
 }
 
-.user__name {
+.userName {
     margin-right: 10px;
     font-size: 1.5rem;
     font-weight: bold;

@@ -1,8 +1,19 @@
 import React from 'react';
+import 'whatwg-fetch'
 import styles from './indexAdprofit.css'
 import 'chart.js';
 
 
+function getPromise(url) {
+    return new Promise((resolve, reject)=>{
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET',url);
+        xhr.withCredentials = true;
+        xhr.onload = () => resolve(xhr.responseText);
+        xhr.onerror = () => reject(xhr.statusText);
+        xhr.send();
+    })
+}
 
 export default class Adprofit extends React.Component {
     constructor(props) {
@@ -15,53 +26,74 @@ export default class Adprofit extends React.Component {
 
 
     componentDidMount() {
-        // fetch("https://jsonplaceholder.typicode.com/todos/1")
-        //   .then(res => res.json())
-        //   .then(
-        //     (result) => {
-        //         console.log(result);
-        //         this.setState({
-        //             isLoaded: true,
-        //             items: result.items
-        //         });
-        //         console.log(this.state);
+        const p = getPromise('http://211.192.165.100:5055/api/main/totalIncomes');
+
+        p.then((result) => {
+            console.log(result);
+        }, () => {
+            console.log('error');
+        })
+
+        // fetch("http://211.192.165.100:5055/api/main/totalIncomes", {
+        //     method: 'GET',
+        //     headers:{
+        //         'Content-Type': 'application/json'
         //     },
-        //     // Note: it's important to handle errors here
-        //     // instead of a catch() block so that we don't swallow
-        //     // exceptions from actual bugs in components.
-        //     (error) => {
-        //       this.setState({
-        //         isLoaded: true,
-        //         error
-        //       });
-        //     }
-        // )
+        //     credentials: 'include'
+        // })
+        // .then((res) => res.json())
+        // .then(response => console.log('Success:', JSON.stringify(response)))
+        // .catch(error => console.error('Error:', error));
+
+        // fetch("/api/login", {
+        //     method: 'POST',
+        //     body: JSON.stringify(user),
+        //     headers:{
+        //         'Content-Type': 'application/json'
+        //     },
+        //     credentials: 'include'
+        // })
+        // .then((res) => res.json())
+        // .then(response => console.log('Success:', JSON.stringify(response)))
+        // .catch(error => console.error('Error:', error));
+
+        
+        // fetch("/api/logout", {
+        //     method: 'GET',
+        //     headers:{
+        //         'Content-Type': 'application/json'
+        //     },
+        //     credentials: 'include'
+        // })
+        // .then((res) => res.json())
+        // .then(response => console.log('Success:', JSON.stringify(response)))
+        // .catch(error => console.error('Error:', error));
     }
 
     render() {
         return (
-            <div className={styles.adprofit__header}>
-                <div className={styles.adprofit__category}>
-                    <span className={styles.adprofit__category__title}>
+            <div className={styles.header}>
+                <div className={styles.category}>
+                    <span className={styles.title}>
                         {this.state.prevMonth.month}월 총 광고수익금
                     </span>
-                    <span className={styles.adprofit__category__number}>
+                    <span className={styles.number}>
                         ${this.state.prevMonth.total}
                     </span>
                 </div>
-                <div className={styles.adprofit__category}>
-                    <span className={styles.adprofit__category__title}>
+                <div className={styles.category}>
+                    <span className={styles.title}>
                         {this.state.currentMonth.month}월 총 광고수익금
                     </span>
-                    <span className={styles.adprofit__category__number}>
+                    <span className={styles.number}>
                         ${this.state.currentMonth.total}
                     </span>
                 </div>
-                <div className={styles.adprofit__category}>
-                    <span className={styles.adprofit__category__title}>
+                <div className={styles.category}>
+                    <span className={styles.title}>
                         전월대비 증감률
                     </span>
-                    <span className={styles.adprofit__category__number}>
+                    <span className={styles.number}>
                         ${this.state.currentMonth.total}
                     </span>
                 </div>

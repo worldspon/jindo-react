@@ -1,5 +1,9 @@
 @import './reset.css';
 
+* {
+    box-sizing: border-box;
+}
+
 html, body {
     font-size: 10px;
 }
@@ -18,4 +22,14 @@ a, a:visited {
 .main {
     padding: 20px;
     background-color: #eff3fa;
+}
+
+.moreBtn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #683b93;
+    color: white;
 }

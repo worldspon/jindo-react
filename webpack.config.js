@@ -57,13 +57,13 @@ module.exports = {
     port: 8080,
     overlay: true,
     historyApiFallback: true,
-    // proxy: {
-    //   '/': {
-    //     target: 'http://211.192.165.100:3031',
-    //     secure: false,
-    //     changeOrigin : true
-    //   }
-    // }
+    proxy: {
+      '/api': {
+        target: 'http://211.192.165.100:5055',
+        secure: false,
+        changeOrigin : true
+      }
+    }
   },
   plugins: [
     ...htmlPlugins,

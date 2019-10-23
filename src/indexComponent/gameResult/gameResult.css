@@ -1,0 +1,85 @@
+.gameResultBox {
+    padding: 40px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.03);
+}
+
+.titleBox {
+    display: flex;
+    flex-flow: column;
+}
+
+.titleBox::after {
+    content: "";
+    background-color: #dcdcdc;
+    flex-flow: column;
+    width: 100%;
+    height: 1px;
+    margin: 20px 0px;
+    display: block;
+}
+
+.titleBoxInner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;;
+}
+
+.contentBox {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    column-gap: 20px;
+}
+
+.title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.gameTable {
+    width: 100%;
+    table-layout: fixed;
+    font-size: 1.2rem;
+}
+
+.headRow > th {
+    padding-bottom : 10px;
+}
+
+.headRow, .row:not(:last-of-type) {
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.headRow > th:first-child {
+    width: 50px;
+}
+
+.row > th {
+    padding: 15px 0;
+}
+
+.headRow > th:first-child, .row > th:first-child {
+    border-right: 1px solid #dcdcdc;
+}
+
+@media screen and (max-width: 1650px){
+    .contentBox {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        row-gap: 20px;
+    }
+}
+
+@media screen and (max-width: 900px){
+    .contentBox {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+        row-gap: 20px;
+    }
+}

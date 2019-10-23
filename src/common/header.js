@@ -7,15 +7,15 @@ export default class Header extends React.Component {
         this.state = {
             subMenu: false
         }
-        // this.showSubMenu = this.showSubMenu.bind(this);
-        // this.hideSubMenu = this.hideSubMenu.bind(this);
+        // this.showsubMenu = this.showsubMenu.bind(this);
+        // this.hidesubMenu = this.hidesubMenu.bind(this);
     }
 
-    showSubMenu() {
+    showsubMenu() {
         this.setState({subMenu: true});
     }
 
-    hideSubMenu() {
+    hidesubMenu() {
         this.setState({subMenu: false});
     }
 
@@ -24,16 +24,16 @@ export default class Header extends React.Component {
             <header>
                 <img className={styles.logo} src={require('../images/header-logo.png')} />
                 <nav
-                    onMouseOver={() => this.showSubMenu()}
+                    onMouseOver={() => this.showsubMenu()}
                 >
                     <ul className={styles.menu}>
-                        <li className={styles.menu__category}>
+                        <li className={styles.category}>
                             <a href="/adprofit/adprofit.html">광고수익</a>
                         </li>
-                        <li className={styles.menu__category}>
+                        <li className={styles.category}>
                             공지사항
                             <ul
-                                className={styles.submenu}
+                                className={styles.subMenu}
                                 style={this.state.subMenu ? {display: 'block'} : {display: 'none'}}
                             >
                                 <li>공지사항</li>
@@ -41,31 +41,31 @@ export default class Header extends React.Component {
                                 <li>게시판</li>
                             </ul>
                         </li>
-                        <li className={styles.menu__category}>FAQ</li>
-                        <li className={styles.menu__category}>
+                        <li className={styles.category}>FAQ</li>
+                        <li className={styles.category}>
                             1:1문의
                             <ul
-                                className={styles.submenu}
+                                className={styles.subMenu}
                                 style={this.state.subMenu ? {display: 'block'} : {display: 'none'}}
                             >
                                 <li>문의하기</li>
                                 <li>내문의</li>
                             </ul>
                         </li>
-                        <li className={styles.menu__category}>
+                        <li className={styles.category}>
                             게임결과
                             <ul
-                                className={styles.submenu}
+                                className={styles.subMenu}
                                 style={this.state.subMenu ? {display: 'block'} : {display: 'none'}}
                             >
                                 <li>게임기록</li>
                             </ul>
                         </li>
-                        <li className={styles.menu__category}>게시판</li>
-                        <li className={styles.menu__category}>
+                        <li className={styles.category}>게시판</li>
+                        <li className={styles.category}>
                             광고신청
                             <ul
-                                className={styles.submenu}
+                                className={styles.subMenu}
                                 style={this.state.subMenu ? {display: 'block'} : {display: 'none'}}
                             >
                                 <li>배너광고신청</li>
@@ -73,10 +73,10 @@ export default class Header extends React.Component {
                             </ul>
                         </li>
                         {
-                            this.props.userInfo.admin && <li className={styles.menu__category}>
+                            this.props.userInfo.admin && <li className={styles.category}>
                             관리자
                             <ul
-                                className={styles.submenu}
+                                className={styles.subMenu}
                                 style={this.state.subMenu ? {display: 'block'} : {display: 'none'}}
                             >
                                 <li>기록조회</li>
@@ -88,14 +88,14 @@ export default class Header extends React.Component {
                         }
                     </ul>
                 </nav>
-                <div className={styles.user__infoBox}>
-                    <span className={styles.user__name}>{this.props.userInfo.id}님</span>
+                <div className={styles.userBox}>
+                    <span className={styles.userName}>{this.props.userInfo.id}님</span>
                     <button className={styles.logout}>로그아웃</button>
                 </div>
                 <div
-                    className={styles.submenu__background}
+                    className={styles.subMenuBackground}
                     style={this.state.subMenu ? {display: 'block'} : {display: 'none'}}
-                    onMouseOut={() => this.hideSubMenu()}
+                    onMouseOut={() => this.hidesubMenu()}
                 ></div>
             </header>
         )

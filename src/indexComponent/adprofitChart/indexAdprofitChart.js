@@ -1,4 +1,5 @@
 import React from 'react';
+import common from '../../common/common.css';
 import styles from './indexAdprofitChart.css'
 import 'chart.js';
 
@@ -91,8 +92,8 @@ export default class AdprofitChart extends React.Component {
         return (
             <div className={styles.chartBox}>
                 <div className={styles.titleBox}>
-                    <h1 className={styles.titleBox__title}>최근 7일 광고수익금</h1>
-                    <button className={styles.titleBox__button}>MORE</button>
+                    <h1 className={styles.title}>최근 7일 광고수익금</h1>
+                    <button className={common.moreBtn}>MORE</button>
                 </div>
                 <div>
                     {/* canvas 반응형을 제어하려면 DIV으로 한 번 더 감싸야한다. */}
