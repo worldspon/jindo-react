@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'whatwg-fetch'
 import common from './common/common.css';
 import Header from './common/header.js';
 import Adprofit from './indexComponent/adprofit/indexAdprofit.js';
@@ -9,7 +10,7 @@ import GameResult from './indexComponent/gameResult/gameResult.js';
 
 const userInfo = {
     id: 'WSJH',
-    admin: true
+    admin: false
 }
 
 const prevMonth = {

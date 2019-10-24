@@ -1,5 +1,4 @@
 import React from 'react';
-import 'whatwg-fetch'
 import styles from './indexAdprofit.css'
 import 'chart.js';
 
@@ -26,24 +25,24 @@ export default class Adprofit extends React.Component {
 
 
     componentDidMount() {
-        const p = getPromise('http://211.192.165.100:5055/api/main/totalIncomes');
+        // const p = getPromise('/api/main/totalIncomes');
 
-        p.then((result) => {
-            console.log(result);
-        }, () => {
-            console.log('error');
-        })
-
-        // fetch("http://211.192.165.100:5055/api/main/totalIncomes", {
-        //     method: 'GET',
-        //     headers:{
-        //         'Content-Type': 'application/json'
-        //     },
-        //     credentials: 'include'
+        // p.then((result) => {
+        //     console.log(result);
+        // }, () => {
+        //     console.log('error');
         // })
-        // .then((res) => res.json())
-        // .then(response => console.log('Success:', JSON.stringify(response)))
-        // .catch(error => console.error('Error:', error));
+
+        fetch("/api/main/totalIncomes", {
+            method: 'GET',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        })
+        .then((res) => res.json())
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error));
 
         // fetch("/api/login", {
         //     method: 'POST',

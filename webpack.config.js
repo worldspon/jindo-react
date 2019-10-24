@@ -13,9 +13,11 @@ const htmlPlugins = getFilesFromDir(PAGE_DIR, [".html"]).map( filePath => {
   });
 });
 
-const entry = getFilesFromDir(PAGE_DIR, [".js",".css"]).reduce( (obj, filePath) => {
+const entry = getFilesFromDir(PAGE_DIR, [".js", ".css"]).reduce((obj, filePath) => {
   const entryChunkName = filePath.replace(path.extname(filePath), "").replace(PAGE_DIR, "");
-  obj[entryChunkName] = `./${filePath}`;
+  path.extname(filePath) === '.js' ?
+    obj[entryChunkName] = ['@babel/polyfill', `./${filePath}`] :
+    obj[entryChunkName] = `./${filePath}`;
   return obj;
 }, {});
 
@@ -53,10 +55,11 @@ module.exports = {
     ]
   },
   devServer: {
-    host: '192.168.242.193',//your ip address
+    host: '192.168.0.25',//your ip address
     port: 8080,
     overlay: true,
     historyApiFallback: true,
+    disableHostCheck: true,
     proxy: {
       '/api': {
         target: 'http://211.192.165.100:5055',
