@@ -51,10 +51,11 @@ header {
 
 .subMenuBackground {
     width: 100%;
-    height: 160px;
+    height: 180px;
     position: absolute;
     top:0;
     left:0;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.03);
     background-color: #FFF;
     z-index: -5;
 }
@@ -88,6 +89,7 @@ header {
 
 .mobileMenuAfterImg {
     width: 40px;
+    margin-bottom: 20px;
     cursor: pointer;
 }
 
@@ -95,11 +97,46 @@ header {
     display: flex;
     flex-flow: column;
     position: fixed;
-    width: 150px;
+    width: 180px;
     height: 100%;
     top:0;
     right: 0;
+    padding: 71px 20px 0 0;
+    align-items: flex-end;
     background-color: #4d06a7;
+}
+
+.mobileMenuList {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-end;
+    font-size: 1.3rem;
+}
+
+.mobileMenuCategory {
+    text-align: right;
+    font-weight: bold;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.mobileMenuCategory:not(:last-of-type) {
+    margin-bottom: 20px;
+}
+
+.mobileSubMenu {
+    display: none;
+    flex-flow: column;
+    align-items: flex-end;
+    font-size: 1rem;
+}
+
+.mobileSubMenu > li {
+    margin-top: 15px;
+}
+
+.mobileSubMenu li a {
+    color: #FFF;
 }
 
 @media screen and (max-width : 1366px) {

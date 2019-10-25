@@ -31,9 +31,27 @@ export default class Header extends React.Component {
         document.removeEventListener('click', this.nonMobileMenuClickEvent);
     }
 
+    toggleMobileSubMenu(e) {
+        if(e.target.children[0].style.display === '' || e.target.children[0].style.display === 'none') {
+            e.target.children[0].style.display = 'flex';
+        } else {
+            e.target.children[0].style.display = 'none';
+        }
+    }
+
     nonMobileMenuClickEvent(e) {
-        if( e.target !== this.mobileMenu ) {
+        const nodeArray = [];
+        nodeArray.push(this.mobileMenu);
+        this.createNodeArray(this.mobileMenu.childNodes, nodeArray);
+        if(nodeArray.indexOf(e.target) === -1) {
             this.hideMobileMenu();
+        }
+    }
+
+    createNodeArray(nodes, array) {
+        for(let index = 0; index < nodes.length; index++) {
+            array.push(nodes[index]);
+            this.createNodeArray(nodes[index].childNodes, array);
         }
     }
 
@@ -41,6 +59,7 @@ export default class Header extends React.Component {
         window.addEventListener('resize', () => {
             this.setState({windowWidth: window.innerWidth});
             if( this.state.mobileMenu ) {
+                document.removeEventListener('click', this.nonMobileMenuClickEvent);
                 this.setState({mobileMenu: false});
             }
         });
@@ -59,9 +78,15 @@ export default class Header extends React.Component {
                         className={styles.subMenu}
                         style={this.state.subMenu ? {display: 'block'} : {display: 'none'}}
                     >
-                        <li>공지사항</li>
-                        <li>업데이트</li>
-                        <li>게시판</li>
+                        <li>
+                            <a href="/all">공지사항</a>
+                        </li>
+                        <li>
+                            <a href="/update">업데이트</a>
+                        </li>
+                        <li>
+                            <a href="/event">이벤트</a>
+                        </li>
                     </ul>
                 </li>
                 <li className={styles.category}>FAQ</li>
@@ -130,13 +155,89 @@ export default class Header extends React.Component {
             className={styles.mobileMenu}
             ref={(ref) => {
                 this.mobileMenu = ref;
-            }}>
+            }}
+        >
             <img
                 className={styles.mobileMenuAfterImg}
                 src={require('../images/menu_after.png')}
                 onClick={()=>this.hideMobileMenu()} />
-            <nav>
-
+            <nav
+                className={styles.mobileNav}
+                ref={(ref) => {
+                    this.mobileNav = ref;
+                }}
+            >
+                <ul className={styles.mobileMenuList}>
+                    <li className={styles.mobileMenuCategory}>
+                        광고수익
+                    </li>
+                    <li className={styles.mobileMenuCategory}
+                        onClick={(e) => this.toggleMobileSubMenu(e)}>
+                        공지사항
+                        <ul className={styles.mobileSubMenu}>
+                            <li>
+                                <a>전체</a>
+                            </li>
+                            <li>
+                                <a>공지사항</a>
+                            </li>
+                            <li>
+                                <a>업데이트</a>
+                            </li>
+                            <li>
+                                <a>이벤트</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li className={styles.mobileMenuCategory}>FAQ</li>
+                    <li className={styles.mobileMenuCategory}
+                        onClick={(e) => this.toggleMobileSubMenu(e)}>
+                        1:1문의
+                        <ul className={styles.mobileSubMenu}>
+                            <li>
+                                <a>1:1문의</a>
+                            </li>
+                            <li>
+                                <a>내문의</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li className={styles.mobileMenuCategory}>게임결과</li>
+                    <li className={styles.mobileMenuCategory}>게시판</li>
+                    <li className={styles.mobileMenuCategory}
+                        onClick={(e) => this.toggleMobileSubMenu(e)}>
+                        광고신청
+                        <ul className={styles.mobileSubMenu}>
+                            <li>
+                                <a>한줄광고신청</a>
+                            </li>
+                            <li>
+                                <a>배너광고신청</a>
+                            </li>
+                        </ul>
+                    </li>
+                    {
+                        this.props.userInfo.admin &&
+                        <li className={styles.mobileMenuCategory}
+                            onClick={(e) => this.toggleMobileSubMenu(e)}>
+                            관리자
+                            <ul className={styles.mobileSubMenu}>
+                                <li>
+                                    <a>기록조회</a>
+                                </li>
+                                <li>
+                                    <a>캐시비관리</a>
+                                </li>
+                                <li>
+                                    <a>서비스관리</a>
+                                </li>
+                                <li>
+                                    <a>정지회원관리</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
             </nav>
         </div>
         return (

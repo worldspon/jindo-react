@@ -10,7 +10,7 @@ import GameResult from './indexComponent/gameResult/gameResult.js';
 
 const userInfo = {
     id: 'WSJH',
-    admin: false
+    admin: true
 }
 
 const prevMonth = {

@@ -30,8 +30,11 @@
 }
 
 .contentBox {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 1fr 20px 1fr 20px 1fr 20px 1fr;
     grid-template-columns: repeat(4, 1fr);
+    -ms-grid-rows: 1fr;
     grid-template-rows: 1fr;
     column-gap: 20px;
 }
