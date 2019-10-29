@@ -13,24 +13,16 @@ const userInfo = {
     admin: true
 }
 
-const prevMonth = {
-    month: 9,
-    total: 281.47
-}
-
-const currentMonth = {
-    month: 10,
-    total: 217.57
-}
 
 class Index extends React.Component {
 
+    
     render() {
         return (
             <div className={common.wrap}>
                 <Header userInfo={userInfo} />
                 <div className={common.main}>
-                    <Adprofit prevMonth={prevMonth} currentMonth={currentMonth} />
+                    <Adprofit />
                     <AdprofitChart />
                     <NoticeFaq />
                     <GameResult />

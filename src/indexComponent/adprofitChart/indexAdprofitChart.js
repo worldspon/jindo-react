@@ -3,8 +3,6 @@ import common from '../../common/common.css';
 import styles from './indexAdprofitChart.css'
 import 'chart.js';
 
-
-
 export default class AdprofitChart extends React.Component {
     constructor(props) {
         super(props);
@@ -14,16 +12,50 @@ export default class AdprofitChart extends React.Component {
         };
     }
 
-    // CHART 생성 및 CHART OBJECT STATE 저장
-    createChart() {
+    getFetch(url) {
+        return fetch(url, {
+            method: 'GET',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        })
+        .then(response => response.json())
+    }
+
+    // 차트 데이터 비동기 통신 종료 후 차트 생성 및 이벤트 바인딩
+    async getChartData(url) {
+        try {
+            const incomeObject = await this.getFetch(url);
+            const keyArray = [], valueArray = [];
+            keyArray.push('');
+            valueArray.push(null);
+
+            for(let [key, value] of Object.entries(incomeObject.incomes)) {
+                keyArray.push(key);
+                valueArray.push(value);
+            }
+            keyArray.push('');
+            valueArray.push(null);
+
+            this.createChart(keyArray, valueArray);
+            this.chartResizeEvent();
+        } catch(error) {
+            // 로그인 실패시
+            console.log(error);
+        }
+    }
+
+    // 차트 생성 및 차트 object를 state에 저장
+    createChart(keyArray, valueArray) {
         const chartTag = document.getElementById("chart").getContext("2d");
         const chartObject = new Chart(chartTag, {
             type: 'line',
             data: {
-                labels: ['', '15일', '16일', '17일', '18일', '19일', '20일', '21일', ''],
+                labels: keyArray,
                 datasets: [{
                     label: false,
-                    data: [null, 154.2, 200.5, 302, 283, 112, 343, 98, null],
+                    data: valueArray,
                     fill: false,
                     borderColor: '#6f569c',
                     borderWidth: 5,
@@ -62,15 +94,15 @@ export default class AdprofitChart extends React.Component {
         });
     }
 
-    // WINDOW RESIZE EVENT BIND 및 CANVAS HEIGHT STATE 변경 및 UPDATE
-    updateChartHeight() {
+    // 창 크기 변경 이벤트 등록 함수
+    chartResizeEvent() {
         window.addEventListener('resize', () => {
             this.setChartHeight();
             this.state.chartObject.update();
         })
     }
 
-    // WINDOW HEIGHT에 따라 CANVAS HEIGHT STATE 값을 변경
+    // 창 넓이에 따라 차트 높이를 변경하는 이벤트 함수
     setChartHeight() {
         if(window.innerWidth <= 500){
             this.setState({chartHeight: 200});
@@ -82,10 +114,7 @@ export default class AdprofitChart extends React.Component {
     }
 
     componentDidMount() {
-        // CHART CREATE
-        this.createChart();
-        // WINDOW RESIZE시 CHART HEIGHT 변경
-        this.updateChartHeight();
+        this.getChartData('/api/main/chart');
     }
 
     render() {

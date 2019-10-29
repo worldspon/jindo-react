@@ -28,9 +28,104 @@ const race = [
     }
 ];
 
-export default class NoticeFaq extends React.Component {
+export default class raceFaq extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {};
+    }
+
+    getFetch(url) {
+        return fetch(url, {
+            method: 'GET',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        })
+        .then(response => response.json())
+    }
+
+    async getRaceData(url) {
+        try {
+            const raceData = await this.getFetch(url);
+            const raceArray = raceData.zombieRaces.map((row, index) => 
+                <tr className={styles.row} key={index}>
+                    <th>{row.count}</th>
+                    <th>{row.win1}</th>
+                    <th>{row.win2}</th>
+                    <th>{row.win3}</th>
+                    <th>{row.win4}</th>
+                    <th>{row.win5}</th>
+                </tr>
+            )
+            this.setState({race: raceArray});
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
+    async getFightData(url) {
+        try {
+            const fightData = await this.getFetch(url);
+            const fightArray = fightData.zombieFights.map((row, index) => 
+                <tr className={styles.row} key={index}>
+                    <th>{row.count}</th>
+                    <th>{row.leftPlayer}</th>
+                    <th>{row.rightPlayer}</th>
+                    <th>{row.winner}</th>
+                    <th>{row.ko ? 'KO승' : '판정승'}</th>
+                </tr>
+            )
+            this.setState({fight: fightArray});
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
+    async getBreakData(url) {
+        try {
+            const breakData = await this.getFetch(url);
+            const breakArray = breakData.zombieBreaks.map((row, index) => 
+                <tr className={styles.row} key={index}>
+                    <th>{row.count}</th>
+                    <th>{row.leftPlayer}</th>
+                    <th>{row.rightPlayer}</th>
+                    <th>{row.leftBroken}</th>
+                    <th>{row.rightBroken}</th>
+                    <th>{row.winner}</th>
+                </tr>
+            )
+            this.setState({break: breakArray});
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
+    async getDropData(url) {
+        try {
+            const dropData = await this.getFetch(url);
+            const dropArray = dropData.zombieDrops.map((row, index) => 
+                <tr className={styles.row} key={index}>
+                    <th>{row.count}</th>
+                    <th>{row.result[0]}</th>
+                    <th>{row.result[1]}</th>
+                    <th>{row.result[2]}</th>
+                    <th>{row.result[3]}</th>
+                    <th>{row.result[4]}</th>
+                    <th>{row.result[5]}</th>
+                </tr>
+            )
+            this.setState({drop: dropArray});
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
+    componentDidMount() {
+        this.getRaceData('/api/main/game/zombieRace');
+        this.getFightData('/api/main/game/zombieFight');
+        this.getBreakData('/api/main/game/zombieBreak');
+        this.getDropData('/api/main/game/zombieDrop');
     }
 
     render() {
@@ -43,7 +138,7 @@ export default class NoticeFaq extends React.Component {
                     </div>
                 </div>
                 <div className={styles.contentBox}>
-                    <div className={styles.contentInner}>
+                    <div className={styles.zombieRace}>
                         <h2 className={styles.title}>{month}.{day} 좀비레이스 결과</h2>
                         <table className={styles.gameTable}>
                             <thead>
@@ -57,50 +152,11 @@ export default class NoticeFaq extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className={styles.row}>
-                                    <th>480</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                </tr>
-                                <tr className={styles.row}>
-                                    <th>139</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                </tr>
-                                <tr className={styles.row}>
-                                    <th>139</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                </tr>
-                                <tr className={styles.row}>
-                                    <th>139</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                </tr>
-                                <tr className={styles.row}>
-                                    <th>139</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                </tr>
+                                {this.state.race}
                             </tbody>
                         </table>
                     </div>
-                    <div className={styles.contentInner}>
+                    <div className={styles.zombieFignt}>
                         <h2 className={styles.title}>{month}.{day} 좀비격투 결과</h2>
                         <table className={styles.gameTable}>
                             <thead>
@@ -113,45 +169,11 @@ export default class NoticeFaq extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className={styles.row}>
-                                    <th>480</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>판정승</th>
-                                </tr>
-                                <tr className={styles.row}>
-                                    <th>139</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>판정승</th>
-                                </tr>
-                                <tr className={styles.row}>
-                                    <th>139</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>판정승</th>
-                                </tr>
-                                <tr className={styles.row}>
-                                    <th>480</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>판정승</th>
-                                </tr>
-                                <tr className={styles.row}>
-                                    <th>139</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>피아니스트</th>
-                                    <th>판정승</th>
-                                </tr>
+                                {this.state.fight}
                             </tbody>
                         </table>
                     </div>
-                    <div className={styles.contentInner}>
+                    <div className={styles.zombieBreak}>
                         <h2 className={styles.title}>{month}.{day} 좀비격파 결과</h2>
                         <table className={styles.gameTable}>
                             <thead>
@@ -165,50 +187,11 @@ export default class NoticeFaq extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className={styles.row}>
-                                    <th>288</th>
-                                    <th>피아니스트</th>
-                                    <th>10</th>
-                                    <th>피아니스트</th>
-                                    <th>10</th>
-                                    <th>피아니스트</th>
-                                </tr>
-                                <tr className={styles.row}>
-                                    <th>139</th>
-                                    <th>피아니스트</th>
-                                    <th>10</th>
-                                    <th>피아니스트</th>
-                                    <th>10</th>
-                                    <th>피아니스트</th>
-                                </tr>
-                                <tr className={styles.row}>
-                                    <th>139</th>
-                                    <th>피아니스트</th>
-                                    <th>10</th>
-                                    <th>피아니스트</th>
-                                    <th>10</th>
-                                    <th>피아니스트</th>
-                                </tr>
-                                <tr className={styles.row}>
-                                    <th>139</th>
-                                    <th>피아니스트</th>
-                                    <th>10</th>
-                                    <th>피아니스트</th>
-                                    <th>10</th>
-                                    <th>피아니스트</th>
-                                </tr>
-                                <tr className={styles.row}>
-                                    <th>139</th>
-                                    <th>피아니스트</th>
-                                    <th>10</th>
-                                    <th>피아니스트</th>
-                                    <th>10</th>
-                                    <th>피아니스트</th>
-                                </tr>
+                                {this.state.break}
                             </tbody>
                         </table>
                     </div>
-                    <div className={styles.contentInner}>
+                    <div className={styles.zombieDrop}>
                         <h2 className={styles.title}>{month}.{day} 좀비낙하 결과</h2>
                         <table className={styles.gameTable}>
                             <thead>
@@ -223,51 +206,7 @@ export default class NoticeFaq extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className={styles.row}>
-                                    <th>488</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                </tr>
-                                <tr className={styles.row}>
-                                    <th>139</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                </tr>
-                                <tr className={styles.row}>
-                                    <th>139</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                </tr>
-                                <tr className={styles.row}>
-                                    <th>139</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                </tr>
-                                <tr className={styles.row}>
-                                    <th>139</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                    <th>45</th>
-                                </tr>
+                                {this.state.drop}
                             </tbody>
                         </table>
                     </div>

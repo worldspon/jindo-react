@@ -2,55 +2,61 @@ import React from 'react';
 import common from '../../common/common.css';
 import styles from './noticeFaq.css';
 
-const noticeArray = [
-    {
-        title: '좀비낙하 서비스 재개 안내',
-        date: '2019-10-10'
-    },
-    {
-        title: '기록 보존 기간에 대한 안내',
-        date: '2019-10-10'
-    },
-    {
-        title: '코코게임즈 정기점검 안내',
-        date: '2019-10-10'
-    },
-    {
-        title: '포인트 환급 연기 안내',
-        date: '2019-10-10'
-    },
-    {
-        title: '태무신왕 충운탑 초기화 안내',
-        date: '2019-10-10'
-    }
-];
-
-const faqArray = [
-    {
-        title: '랭킹은 뭔가요?',
-        date: '2019-10-10'
-    },
-    {
-        title: '추출기는 어떻게 사용하나요?',
-        date: '2019-10-10'
-    },
-    {
-        title: '좀비격투 게임 보상 지급이 이상해요',
-        date: '2019-10-10'
-    },
-    {
-        title: '쿄통카드는 어떻게 받을 수 있나요?',
-        date: '2019-10-10'
-    },
-    {
-        title: '1:1 거래에서 취소를 했는데 물품이 돌아오지 않아요.',
-        date: '2019-10-10'
-    }
-]
-
 export default class NoticeFaq extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {};
+    }
+
+    getFetch(url) {
+        return fetch(url, {
+            method: 'GET',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        })
+        .then(response => response.json())
+    }
+
+    // 공지사항 데이터 비동기 통신 종료 후 컴포넌트 형식으로 저장
+    async getNoticeData(url) {
+        try {
+            const noticeData = await this.getFetch(url);
+            const noticeArray = noticeData.notices.map((row, index) => 
+                <div className={styles.row} key={index} data-id={row.id}>
+                    <a href={`/notice/0/${row.id}`}>
+                        <span>{row.title}</span>
+                    </a>
+                    <span>{row.created}</span>
+                </div>
+            )
+            this.setState({notice: noticeArray});
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
+    // FAQ 데이터 비동기 통신 종료 후 컴포넌트 형식으로 저장
+    async getFaqData(url) {
+        try {
+            const faqData = await this.getFetch(url);
+            const faqArray = faqData.faqs.map((row, index) => 
+                <div className={styles.row} key={index} data-id={row.id}>
+                    <a href={`/faq/0/${row.id}`}>
+                        <span>{row.question}</span>
+                    </a>
+                </div>
+            )
+        this.setState({faq: faqArray});
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
+    componentDidMount() {
+        this.getNoticeData('/api/main/notice');
+        this.getFaqData('/api/main/faq');
     }
 
     render() {
@@ -63,16 +69,7 @@ export default class NoticeFaq extends React.Component {
                             <button className={common.moreBtn}>MORE</button>
                         </div>
                     </div>
-                    {
-                        noticeArray.map((row, index) => 
-                            <div className={styles.row} key={index}>
-                                <a>
-                                    <span>{row.title}</span>
-                                </a>
-                                <span>{row.date}</span>
-                            </div>
-                        )
-                    }
+                    { this.state.notice }
                 </div>
                 <div className={styles.faqBox}>
                     <div className={styles.titleBox}>
@@ -81,16 +78,7 @@ export default class NoticeFaq extends React.Component {
                             <button className={common.moreBtn}>MORE</button>
                         </div>
                     </div>
-                    {
-                        faqArray.map((row, index) => 
-                            <div className={styles.row} key={index}>
-                                <a>
-                                    <span>{row.title}</span>
-                                </a>
-                                <span>{row.date}</span>
-                            </div>
-                        )
-                    }
+                    { this.state.faq }
                 </div>
             </div>
         )
