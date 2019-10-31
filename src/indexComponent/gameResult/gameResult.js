@@ -5,37 +5,14 @@ import styles from './gameResult.css';
 const month = new Date().getMonth() +1;
 const day = new Date().getDate();
 
-const race = [
-    {
-        count: 139,
-        result: ['코코엄마', '알바생', '복서', '돌쇠']
-    },
-    {
-        count: 138,
-        result: ['코코엄마', '알바생', '복서', '돌쇠']
-    },
-    {
-        count: 137,
-        result: ['코코엄마', '알바생', '복서', '돌쇠']
-    },
-    {
-        count: 136,
-        result: ['코코엄마', '알바생', '복서', '돌쇠']
-    },
-    {
-        count: 135,
-        result: ['코코엄마', '알바생', '복서', '돌쇠']
-    }
-];
-
 export default class raceFaq extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
 
-    getFetch(url) {
-        return fetch(url, {
+    getFetch(url, signal) {
+        return fetch(url, {signal}, {
             method: 'GET',
             headers:{
                 'Content-Type': 'application/json'
@@ -45,9 +22,9 @@ export default class raceFaq extends React.Component {
         .then(response => response.json())
     }
 
-    async getRaceData(url) {
+    async getRaceData(url, signal) {
         try {
-            const raceData = await this.getFetch(url);
+            const raceData = await this.getFetch(url, signal);
             const raceArray = raceData.zombieRaces.map((row, index) => 
                 <tr className={styles.row} key={index}>
                     <th>{row.count}</th>
@@ -64,9 +41,9 @@ export default class raceFaq extends React.Component {
         }
     }
 
-    async getFightData(url) {
+    async getFightData(url, signal) {
         try {
-            const fightData = await this.getFetch(url);
+            const fightData = await this.getFetch(url, signal);
             const fightArray = fightData.zombieFights.map((row, index) => 
                 <tr className={styles.row} key={index}>
                     <th>{row.count}</th>
@@ -82,9 +59,9 @@ export default class raceFaq extends React.Component {
         }
     }
 
-    async getBreakData(url) {
+    async getBreakData(url, signal) {
         try {
-            const breakData = await this.getFetch(url);
+            const breakData = await this.getFetch(url, signal);
             const breakArray = breakData.zombieBreaks.map((row, index) => 
                 <tr className={styles.row} key={index}>
                     <th>{row.count}</th>
@@ -101,9 +78,9 @@ export default class raceFaq extends React.Component {
         }
     }
 
-    async getDropData(url) {
+    async getDropData(url, signal) {
         try {
-            const dropData = await this.getFetch(url);
+            const dropData = await this.getFetch(url, signal);
             const dropArray = dropData.zombieDrops.map((row, index) => 
                 <tr className={styles.row} key={index}>
                     <th>{row.count}</th>
@@ -122,10 +99,16 @@ export default class raceFaq extends React.Component {
     }
 
     componentDidMount() {
-        this.getRaceData('/api/main/game/zombieRace');
-        this.getFightData('/api/main/game/zombieFight');
-        this.getBreakData('/api/main/game/zombieBreak');
-        this.getDropData('/api/main/game/zombieDrop');
+        this.controller = new AbortController();
+        const signal = this.controller.signal;
+        this.getRaceData('/api/main/game/zombieRace', signal);
+        this.getFightData('/api/main/game/zombieFight', signal);
+        this.getBreakData('/api/main/game/zombieBreak', signal);
+        this.getDropData('/api/main/game/zombieDrop', signal);
+    }
+
+    componentWillUnmount() {
+        this.controller.abort();
     }
 
     render() {

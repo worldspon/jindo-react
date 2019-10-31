@@ -1,3 +1,70 @@
-#root {
-  color: red;
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: linear-gradient(-46deg,#7401b6,#2d0a9c 75%);
+}
+
+.loginBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  width: 90%;
+  max-width: 1600px;
+  padding: 150px;
+  border-radius: 10px;
+  background: linear-gradient(46deg,#fff 30%,#ddd);
+  box-shadow: 0 10px 20px 10px rgba(40,40,40,0.5);
+}
+
+.loginLogo {
+  width: 120px;
+  margin-bottom: 40px;
+}
+
+.inputId, .inputPw, .loginButton {
+  width: 80%;
+  max-width: 450px;
+  padding: 20px;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.inputId, .inputPw {
+  color: #aaa;
+  font-weight: bold;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+.inputId:focus, .inputPw:focus {
+  box-shadow: 0 0 0 2px #4d06a7;
+}
+
+.loginButton {
+  margin-bottom: 30px;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(90deg, #6503b1 30%,#300a9d);
+}
+
+.copyright {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1500px) {
+  .loginBox {
+    padding: 150px 0;
+  }
+}
+
+
+@media screen and (max-width: 900px) {
+  .loginBox {
+    padding: 100px 0;
+  }
 }

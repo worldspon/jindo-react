@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './header.css';
 
+
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
@@ -11,6 +12,7 @@ export default class Header extends React.Component {
         }
 
         this.nonMobileMenuClickEvent = this.nonMobileMenuClickEvent.bind(this);
+
     }
 
     showsubMenu() {

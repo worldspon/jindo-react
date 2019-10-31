@@ -8,8 +8,8 @@ export default class NoticeFaq extends React.Component {
         this.state = {};
     }
 
-    getFetch(url) {
-        return fetch(url, {
+    getFetch(url, signal) {
+        return fetch(url, {signal}, {
             method: 'GET',
             headers:{
                 'Content-Type': 'application/json'
@@ -20,9 +20,9 @@ export default class NoticeFaq extends React.Component {
     }
 
     // 공지사항 데이터 비동기 통신 종료 후 컴포넌트 형식으로 저장
-    async getNoticeData(url) {
+    async getNoticeData(url, signal) {
         try {
-            const noticeData = await this.getFetch(url);
+            const noticeData = await this.getFetch(url, signal);
             const noticeArray = noticeData.notices.map((row, index) => 
                 <div className={styles.row} key={index} data-id={row.id}>
                     <a href={`/notice/0/${row.id}`}>
@@ -38,9 +38,9 @@ export default class NoticeFaq extends React.Component {
     }
 
     // FAQ 데이터 비동기 통신 종료 후 컴포넌트 형식으로 저장
-    async getFaqData(url) {
+    async getFaqData(url, signal) {
         try {
-            const faqData = await this.getFetch(url);
+            const faqData = await this.getFetch(url, signal);
             const faqArray = faqData.faqs.map((row, index) => 
                 <div className={styles.row} key={index} data-id={row.id}>
                     <a href={`/faq/0/${row.id}`}>
@@ -48,15 +48,21 @@ export default class NoticeFaq extends React.Component {
                     </a>
                 </div>
             )
-        this.setState({faq: faqArray});
+            this.setState({faq: faqArray});
         } catch(error) {
             console.log(error);
         }
     }
 
     componentDidMount() {
-        this.getNoticeData('/api/main/notice');
-        this.getFaqData('/api/main/faq');
+        this.controller = new AbortController();
+        const signal = this.controller.signal;
+        this.getNoticeData('/api/main/notice', signal);
+        this.getFaqData('/api/main/faq', signal);
+    }
+
+    componentWillUnmount() {
+        this.controller.abort();
     }
 
     render() {

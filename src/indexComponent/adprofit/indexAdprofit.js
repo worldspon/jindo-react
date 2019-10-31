@@ -17,8 +17,8 @@ export default class Adprofit extends React.Component {
         });
     }
 
-    getFetch(url) {
-        return fetch(url, {
+    getFetch(url, signal) {
+        return fetch(url, {signal}, {
             method: 'GET',
             headers:{
                 'Content-Type': 'application/json'
@@ -29,9 +29,9 @@ export default class Adprofit extends React.Component {
     }
 
     // 수익 데이터 비동기 통신 종료 후 화폐 형식으로 저장
-    async getIncomeData(url) {
+    async getIncomeData(url, signal) {
         try {
-            const incomeData = await this.getFetch(url);
+            const incomeData = await this.getFetch(url, signal);
             this.setState({
                 prevIncome: this.currencyFormat(incomeData.estimatedIncomes),
                 currentIncome: this.currencyFormat(incomeData.incomes),
@@ -50,9 +50,16 @@ export default class Adprofit extends React.Component {
 
 
     componentDidMount() {
+        this.controller = new AbortController();
+        const signal = this.controller.signal;
         this.setMonth();
-        this.getIncomeData("/api/main/totalIncomes");
+        this.getIncomeData("/api/main/totalIncomes", signal);
     }
+
+    componentWillUnmount() {
+        this.controller.abort();
+    }
+
 
     render() {
         return (

@@ -12,8 +12,8 @@ export default class AdprofitChart extends React.Component {
         };
     }
 
-    getFetch(url) {
-        return fetch(url, {
+    getFetch(url, signal) {
+        return fetch(url, {signal}, {
             method: 'GET',
             headers:{
                 'Content-Type': 'application/json'
@@ -24,9 +24,9 @@ export default class AdprofitChart extends React.Component {
     }
 
     // 차트 데이터 비동기 통신 종료 후 차트 생성 및 이벤트 바인딩
-    async getChartData(url) {
+    async getChartData(url, signal) {
         try {
-            const incomeObject = await this.getFetch(url);
+            const incomeObject = await this.getFetch(url, signal);
             const keyArray = [], valueArray = [];
             keyArray.push('');
             valueArray.push(null);
@@ -114,7 +114,13 @@ export default class AdprofitChart extends React.Component {
     }
 
     componentDidMount() {
-        this.getChartData('/api/main/chart');
+        this.controller = new AbortController();
+        const signal = this.controller.signal;
+        this.getChartData('/api/main/chart', signal);
+    }
+
+    componentWillUnmount() {
+        this.controller.abort();
     }
 
     render() {
