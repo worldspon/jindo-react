@@ -1,5 +1,6 @@
-import 'whatwg-fetch';
-import 'abortcontroller-polyfill';
+// import 'whatwg-fetch';
+// import 'abortcontroller-polyfill';
+import fetchAsync from './common/fetch.js';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -41,10 +42,10 @@ getValidateLoginData('/api/loginCheck');
 
 async function getValidateLoginData(url) {
     try {
-        const fetchRespnse = await getFetch(url);
+        const fetchRespnse = await fetchAsync.get(url);
 // fetchRespnse.ok
         if(true) {
-            // const loginData = await fetchRespnse.json();
+            const loginData = await fetchRespnse.json();
             ReactDOM.render(
                 <Index />,
                 document.getElementById('root')
@@ -58,18 +59,6 @@ async function getValidateLoginData(url) {
 
     } catch(error) {
         alert('오류가 발생하였습니다. 다시 시도해주세요.')
-        location.href="http://192.168.0.25:8080/login/login.html";
+        // location.href="http://192.168.0.25:8080/login/login.html";
     }
-}
-
-function getFetch(url) {
-    return fetch(url, {
-        method: 'GET',
-        headers:{
-            'Content-Type': 'application/json'
-        },
-        credentials: 'include'
-    })
-    .then(res => res)
-    .catch(e => {throw new Error()})
 }

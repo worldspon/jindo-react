@@ -10,9 +10,7 @@ export default class Header extends React.Component {
             windowWidth: window.innerWidth,
             mobileMenu: false
         }
-
         this.nonMobileMenuClickEvent = this.nonMobileMenuClickEvent.bind(this);
-
     }
 
     showsubMenu() {
