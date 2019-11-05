@@ -1,6 +1,8 @@
+import FetchAsync from '../common/fetch.js';
+import axios from 'axios';
+
 import React from 'react';
 import styles from './header.css';
-
 
 export default class Header extends React.Component {
     constructor(props) {
@@ -54,6 +56,24 @@ export default class Header extends React.Component {
             this.createNodeArray(nodes[index].childNodes, array);
         }
     }
+
+    async tryLogout() {
+        try {
+          const fetchResponse = await FetchAsync.delete('/api/logout');
+          if(fetchResponse.ok) {
+            const loginData = await fetchResponse.json();
+            alert(loginData.message);
+            location.href="/";
+          } else {
+            const loginData = await fetchResponse.json();
+            throw new Error(loginData.error);
+          }
+        } catch(error) {
+            // 로그인 실패시
+            alert(error.message);
+        }
+    }
+
 
     componentDidMount() {
         window.addEventListener('resize', () => {
@@ -245,8 +265,8 @@ export default class Header extends React.Component {
                 <img className={styles.logo} src={require('../images/header-logo.png')} />
                 {window.innerWidth > 1366 ? nav : mobileMenuImg}
                 <div className={styles.userBox}>
-                    <span className={styles.userName}>{this.props.userInfo.id}님</span>
-                    <button className={styles.logout}>로그아웃</button>
+                    <span className={styles.userName}>{this.props.userInfo.trademark}님</span>
+                    <button className={styles.logout} onClick={() => {this.tryLogout()}}>로그아웃</button>
                 </div>
                 {window.innerWidth > 1366 ? subMenuBackground : ''}
                 {this.state.mobileMenu ? mobileMenu : ''}

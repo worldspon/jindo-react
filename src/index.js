@@ -1,5 +1,3 @@
-// import 'whatwg-fetch';
-// import 'abortcontroller-polyfill';
 import fetchAsync from './common/fetch.js';
 
 import React from 'react';
@@ -11,21 +9,16 @@ import AdprofitChart from './indexComponent/adprofitChart/indexAdprofitChart.js'
 import NoticeFaq from './indexComponent/noticeFaq/noticeFaq.js';
 import GameResult from './indexComponent/gameResult/gameResult.js';
 
-const userInfo = {
-    id: 'WSJH',
-    admin: true
-}
 
 class Index extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
     }
 
     render() {
         return (
             <div className={common.wrap}>
-                <Header userInfo={userInfo}/>
+                <Header userInfo={this.props.userInfo}/>
                 <div className={common.main}>
                     <Adprofit />
                     <AdprofitChart />
@@ -37,28 +30,23 @@ class Index extends React.Component {
     }
 }
 
-
 getValidateLoginData('/api/loginCheck');
 
 async function getValidateLoginData(url) {
     try {
-        const fetchRespnse = await fetchAsync.get(url);
-// fetchRespnse.ok
-        if(true) {
-            const loginData = await fetchRespnse.json();
+        const fetchResponse = await fetchAsync.get(url);
+        if(fetchResponse.ok) {
+            const loginData = await fetchResponse.json();
             ReactDOM.render(
-                <Index />,
+                <Index userInfo={loginData} />,
                 document.getElementById('root')
             );
         } else {
             const errorData = await fetchRespnse.json();
-            // alert(errorData.error);
-            // location.href="http://192.168.0.25:8080/login/login.html";
+            alert(errorData.error);
+            location.href="/login/login.html";
         }
-
-
     } catch(error) {
-        alert('오류가 발생하였습니다. 다시 시도해주세요.')
-        // location.href="http://192.168.0.25:8080/login/login.html";
+        location.href="/login/login.html";
     }
 }

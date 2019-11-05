@@ -71,7 +71,7 @@ TYPE: POST
 
 2. 로그아웃
 URL: /api/logout
-TYPE: GET
+TYPE: DELETE
 응답 형식: 
 {
 	message: 처리 결과

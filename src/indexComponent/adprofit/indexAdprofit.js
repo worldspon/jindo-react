@@ -1,3 +1,4 @@
+import fetchAsync from '../../common/fetch.js';
 import React from 'react';
 import styles from './indexAdprofit.css'
 
@@ -17,21 +18,11 @@ export default class Adprofit extends React.Component {
         });
     }
 
-    getFetch(url, signal) {
-        return fetch(url, {signal}, {
-            method: 'GET',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-        })
-        .then(response => response.json())
-    }
-
     // 수익 데이터 비동기 통신 종료 후 화폐 형식으로 저장
     async getIncomeData(url, signal) {
         try {
-            const incomeData = await this.getFetch(url, signal);
+            const incomeData = await fetchAsync.get(url, signal);
+            console.log(incomeData);
             this.setState({
                 prevIncome: this.currencyFormat(incomeData.estimatedIncomes),
                 currentIncome: this.currencyFormat(incomeData.incomes),
