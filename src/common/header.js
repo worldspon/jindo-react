@@ -1,6 +1,4 @@
 import FetchAsync from '../common/fetch.js';
-import axios from 'axios';
-
 import React from 'react';
 import styles from './header.css';
 

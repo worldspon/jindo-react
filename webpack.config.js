@@ -54,7 +54,7 @@ module.exports = {
     ]
   },
   devServer: {
-    host: '172.30.1.45',//your ip address
+    host: '192.168.0.25',//your ip address
     port: 8080,
     overlay: true,
     historyApiFallback: true,

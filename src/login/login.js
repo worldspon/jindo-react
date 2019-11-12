@@ -1,4 +1,4 @@
-import FetchAsync from '../common/fetch.js';
+import fetchAsync from '../common/fetch.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../common/common.css';
@@ -44,22 +44,15 @@ class Login extends React.Component {
   // 로그인 시도
   async tryLogin() {
     try {
-      const fetchResponse = await FetchAsync.post('/api/login', this.state);
+      const fetchResponse = await fetchAsync.post('/api/login', this.state);
 
       // fetchResponse.ok boolean 값으로 통신오류를 검증한다.
       if(fetchResponse.ok) {
         location.href="/";
       } else {
         let message = '';
-
-        // id, pw, 공백 등 검증에러시 500 그 외 알수없는 오류
-        if(fetchResponse.status === 500) {
-          message = await fetchResponse.json();
-          message = message.error;
-        } else {
-          message = '오류가 발생하였습니다\n다시 시도해주세요.';
-        }
-        // message 설정 후 Error throw
+        message = await fetchResponse.json();
+        message = message.error.message;
         throw Error(message);
       }
     } catch(error) {
@@ -68,23 +61,23 @@ class Login extends React.Component {
     }
   }
 
-  async tryLogout() {
-    try {
-      const fetchResponse = await FetchAsync.delete('/api/logout');
-      if(fetchResponse.ok) {
-        const loginData = await fetchResponse.json();
-        alert(loginData.message);
-        location.href="/login/login.html";
-      } else {
-        const loginData = await fetchResponse.json();
-        throw new Error(loginData.error);
-      }
-      alert(loginData.data.message);
-    } catch(error) {
-        // 로그인 실패시
-        alert(error.message);
-    }
-  }  
+  // async tryLogout() {
+  //   try {
+  //     const fetchResponse = await fetchAsync.delete('/api/logout');
+  //     if(fetchResponse.ok) {
+  //       const loginData = await fetchResponse.json();
+  //       alert(loginData.message);
+  //       location.href="/login/login.html";
+  //     } else {
+  //       const loginData = await fetchResponse.json();
+  //       throw new Error(loginData.error);
+  //     }
+  //     alert(loginData.data.message);
+  //   } catch(error) {
+  //       // 로그인 실패시
+  //       alert(error.message);
+  //   }
+  // }  
 
   render() {
     return (
@@ -95,8 +88,8 @@ class Login extends React.Component {
           <input
             className={styles.inputId}
             type="text" placeholder="아이디" value={this.state.username}
-            onChange={(e)=> this.idChange(e)}
-            onKeyPress={(e) => {this.focusPasswordInput(e)}}>
+            onChange={(e) => this.idChange(e)}
+            onKeyPress={(e) => this.focusPasswordInput(e)}>
           </input>
 
           <input
@@ -104,15 +97,15 @@ class Login extends React.Component {
             className={styles.inputPw}
             type="password" placeholder="비밀번호" value={this.state.password}
             onChange={(e) => this.pwChange(e)}
-            onKeyPress={(e) => {this.emitLoginEvent(e)}}>
+            onKeyPress={(e) => this.emitLoginEvent(e)}>
           </input>
 
           <button
             ref={this.loginButton}
             className={styles.loginButton}
-            onClick={() => {this.tryLogin()}}>로그인
+            onClick={() => this.tryLogin()}>로그인
           </button>
-          <button className={styles.loginButton} onClick={() => {this.tryLogout()}}>로그아웃</button>
+          {/* <button className={styles.loginButton} onClick={() => {this.tryLogout()}}>로그아웃</button> */}
           <p className={styles.copyright}>Copyright 2019 WORLDSPON Inc. All Rights Reserved.</p>
         </div>
       </div>

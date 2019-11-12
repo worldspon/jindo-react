@@ -1,5 +1,4 @@
 import fetchAsync from './common/fetch.js';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import common from './common/common.css';
@@ -30,11 +29,11 @@ class Index extends React.Component {
     }
 }
 
-getValidateLoginData('/api/loginCheck');
+getValidateLoginData();
 
-async function getValidateLoginData(url) {
+async function getValidateLoginData() {
     try {
-        const fetchResponse = await fetchAsync.get(url);
+        const fetchResponse = await fetchAsync.get('/api/loginCheck');
         if(fetchResponse.ok) {
             const loginData = await fetchResponse.json();
             ReactDOM.render(

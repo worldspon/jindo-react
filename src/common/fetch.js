@@ -14,7 +14,9 @@ export default class FetchAsync {
             }
         })
         .then(res => res)
-        .catch(() => {throw new Error('오류가 발생하였습니다\n다시 시도해주세요.')})
+        .catch(() => {
+            throw new Error('알 수 없는 오류가 발생했습니다.\n다시 시도해주세요.');
+        })
     }
 
     static post(url, data) {
@@ -28,8 +30,8 @@ export default class FetchAsync {
             body: JSON.stringify(data)
         })
         .then(res => res)
-        .catch((e) => {
-            throw new Error('catch')
+        .catch(() => {
+            throw new Error('알 수 없는 오류가 발생했습니다.\n다시 시도해주세요.');
         })
     }
 
@@ -43,6 +45,8 @@ export default class FetchAsync {
             }
         })
         .then(res => res)
-        .catch(() => {throw new Error()})
+        .catch(() => {
+            throw new Error('알 수 없는 오류가 발생했습니다.\n다시 시도해주세요.');
+        })
     }
 }
